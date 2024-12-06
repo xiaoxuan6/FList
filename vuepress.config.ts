@@ -10,6 +10,7 @@ import { netlifyDownProxy } from './src/node/proxy/netlifyDownProxy/index.js';
 import { giteeReleasesFilesAnalysis } from './src/node/analysis/giteeReleasesFilesAnalysis/index.js';
 import { githubReposAnalysis } from './src/node/analysis/githubReposAnalysis/index.js';
 import { giteeReposAnalysis } from './src/node/analysis/giteeReposAnalysis/index.js';
+import {githubPrivateReposAnalysis} from "./src/node/analysis/githubPrivateReposAnalysis/index.js";
 
 
 /**
@@ -91,6 +92,16 @@ export default defineUserConfig({
       analysis: githubReposAnalysis({
         user: "Aikoyori",
         repository: "ProgrammingVTuberLogos",
+      }),
+      downProxy: cloudflarePagesDownProxy()
+    },
+    {
+      // 复制 .env.example 为 .env 修改成自己的github token
+      mountPath: "/resource",
+      analysis: githubPrivateReposAnalysis({
+          user: "xiaoxuan6",
+          repository: "resource",
+          hideReadme: true,
       }),
       downProxy: cloudflarePagesDownProxy()
     },
