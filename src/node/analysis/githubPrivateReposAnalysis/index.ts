@@ -16,7 +16,8 @@ export interface GithubPrivateRepository {
     //最大深度
     maxDeep?: number
     //隐藏readme文件
-    hideReadme?: boolean
+    hideReadme?: boolean,
+    ignore?: string[]
 }
 
 env.config()
@@ -59,6 +60,9 @@ export function githubPrivateReposAnalysis(config: GithubPrivateRepository): () 
             };
 
             for (const resJson of resJsons) {
+                if (config.ignore?.includes(resJson.name)) {
+                    continue
+                }
                 if (resJson.type == "file") {
                     //特性1: 如果是README.MD文件，就获取内容,设置到content中
                     let pushThis = true;

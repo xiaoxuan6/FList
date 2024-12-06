@@ -102,6 +102,7 @@ export default defineUserConfig({
           user: "xiaoxuan6",
           repository: "resource",
           hideReadme: true,
+          ignore: ['.github', '.gitignore']
       }),
       downProxy: cloudflarePagesDownProxy()
     },
